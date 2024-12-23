@@ -48,7 +48,6 @@ public class AppController
 	public ModelAndView saveUser(@ModelAttribute UserDto user)
 	{
 		userDao.saveUser(user);
-		System.out.println("*****************************");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		return mv;

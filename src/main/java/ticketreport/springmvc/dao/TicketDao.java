@@ -18,9 +18,9 @@ public class TicketDao
 	
 	public TicketDto saveTicket(TicketDto ticket)
 	{
-		entityTransaction.begin();
+		entityManager.getTransaction().begin();
 		entityManager.persist(ticket);
-		entityTransaction.commit();
+		entityManager.getTransaction().commit();
 		return ticket;
 	}
 	
@@ -39,9 +39,9 @@ public class TicketDao
 		TicketDto t = entityManager.find(TicketDto.class, ticketNumber);
 		if(t != null)
 		{
-			entityTransaction.begin();
+			entityManager.getTransaction().begin();
 			entityManager.remove(t);
-			entityTransaction.commit();
+			entityManager.getTransaction().commit();
 			return t;
 		}
 		return null;
@@ -52,10 +52,10 @@ public class TicketDao
 		TicketDto t = entityManager.find(TicketDto.class, ticketNumber);
 		if(t != null)
 		{
-			entityTransaction.begin();
+			entityManager.getTransaction().begin();
 			ticket.setTicketNumber(ticketNumber);
 			TicketDto updatedTicket = entityManager.merge(ticket);
-			entityTransaction.commit();
+			entityManager.getTransaction().commit();
 			return updatedTicket;
 		}
 		return null;

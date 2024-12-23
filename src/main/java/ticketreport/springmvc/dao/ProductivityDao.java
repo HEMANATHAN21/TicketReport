@@ -21,9 +21,9 @@ public class ProductivityDao
 	
 	public ProductivityDto saveProdutivity(ProductivityDto productivity)
 	{
-		entityTransaction.begin();
+		entityManager.getTransaction().begin();
 		entityManager.persist(productivity);
-		entityTransaction.commit();
+		entityManager.getTransaction().commit();
 		return productivity;
 	}
 	
@@ -42,9 +42,9 @@ public class ProductivityDao
 		ProductivityDto p = entityManager.find(ProductivityDto.class, productivity_Id);
 		if(p != null)
 		{
-			entityTransaction.begin();
+			entityManager.getTransaction().begin();
 			entityManager.remove(p);
-			entityTransaction.commit();
+			entityManager.getTransaction().commit();
 			return p;
 		}
 		return null;
@@ -55,10 +55,10 @@ public class ProductivityDao
 		ProductivityDto p = entityManager.find(ProductivityDto.class, productivityId);
 		if(p != null)
 		{
-			entityTransaction.begin();
+			entityManager.getTransaction().begin();
 			productivity.setProductivityId(productivityId);
 			ProductivityDto updatedProductivity = entityManager.merge(productivity);
-			entityTransaction.commit();
+			entityManager.getTransaction().commit();
 			return updatedProductivity;
 		}
 		return null;

@@ -21,10 +21,10 @@ public class UserDao
 	
 	public UserDto saveUser(UserDto user)
 	{
-		entityTransaction.begin();
-		System.out.println(user.getUserId()+" "+user.getUserMail());
+		entityManager.getTransaction().begin();
+//		System.out.println(user.getUserId()+" "+user.getUserMail());
 		entityManager.persist(user);
-		entityTransaction.commit();
+		entityManager.getTransaction().commit();
 		return user;
 		
 	}
@@ -44,9 +44,9 @@ public class UserDao
 		UserDto u = entityManager.find(UserDto.class, userId);
 		if(u != null)
 		{
-			entityTransaction.begin();
+			entityManager.getTransaction().begin();
 			entityManager.remove(u);
-			entityTransaction.commit();
+			entityManager.getTransaction().commit();
 			return u;
 		}
 		return null;
@@ -57,10 +57,10 @@ public class UserDao
 		UserDto u = entityManager.find(UserDto.class, userId);
 		if(u != null)
 		{
-			entityTransaction.begin();
+			entityManager.getTransaction().begin();
 			user.setUserId(userId);
 			UserDto updatedUser = entityManager.merge(user);
-			entityTransaction.commit();
+			entityManager.getTransaction().commit();
 			return updatedUser;
 		}
 		return null;

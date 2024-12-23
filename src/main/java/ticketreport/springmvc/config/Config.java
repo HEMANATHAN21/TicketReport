@@ -22,5 +22,5 @@ public class Config
 	public EntityTransaction getEntityTransaction()
 	{
 		return Persistence.createEntityManagerFactory("Hema_DB_Persistence").createEntityManager().getTransaction();
-	}
+	}//not working
 }
