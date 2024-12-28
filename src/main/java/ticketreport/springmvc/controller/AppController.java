@@ -51,6 +51,7 @@ public class AppController
 		userDao.saveUser(user);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
+		mv.addObject("message", "SignUp Successfull");
 		return mv;
 	}
 	
@@ -67,7 +68,7 @@ public class AppController
 				System.out.println(user);
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("home.jsp");
-				mv.addObject("productivity",user.getUserTotalProductivity());
+				mv.addObject("userData",user);
 				mv.addObject("message", "Login successfull");
 				return mv;
 			}
