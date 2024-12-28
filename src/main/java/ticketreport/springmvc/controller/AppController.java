@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ticketreport.springmvc.dao.ProductivityDao;
@@ -51,5 +52,28 @@ public class AppController
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public ModelAndView signIn(@RequestParam String email, @RequestParam String password)
+	{
+		UserDto user = userDao.findByMail(email);
+		if(user != null)
+		{
+			System.out.println(user.getUserMail());
+			if(user.getUserPassword().equals(password))
+			{
+				System.err.println(user.getUserPassword());
+				System.out.println(user);
+				ModelAndView mv = new ModelAndView();
+				mv.setViewName("home.jsp");
+				mv.addObject("productivity",user.getUserTotalProductivity());
+				mv.addObject("message", "Login successfull");
+				return mv;
+			}
+			return new ModelAndView("signin.jsp");
+		}
+		return new ModelAndView("signin.jsp");
+		
 	}
 }

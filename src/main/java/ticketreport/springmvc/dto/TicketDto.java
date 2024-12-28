@@ -1,5 +1,6 @@
 package ticketreport.springmvc.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Component
 public class TicketDto 
@@ -18,7 +19,8 @@ public class TicketDto
 	String time;
 	Status ticketStatus;
 	Category ticketCategory;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JsonIgnore
 	ProductivityDto productivity;
 	public long getTicketNumber() {
 		return ticketNumber;
@@ -55,6 +57,11 @@ public class TicketDto
 	}
 	public void setProductivity(ProductivityDto productivity) {
 		this.productivity = productivity;
+	}
+	@Override
+	public String toString() {
+		return "TicketDto [ticketNumber=" + ticketNumber + ", date=" + date + ", time=" + time + ", ticketStatus="
+				+ ticketStatus + ", ticketCategory=" + ticketCategory + "]";
 	}
 	
 	

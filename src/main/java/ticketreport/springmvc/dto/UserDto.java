@@ -2,6 +2,7 @@ package ticketreport.springmvc.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class UserDto
 	String userMail;
 	String userName;
 	String userPassword;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	List<ProductivityDto> userTotalProductivity;
 	public long getUserId() {
 		return userId;
@@ -51,6 +52,11 @@ public class UserDto
 	}
 	public void setUserTotalProductivity(List<ProductivityDto> userTotalProductivity) {
 		this.userTotalProductivity = userTotalProductivity;
+	}
+	@Override
+	public String toString() {
+		return "UserDto [userId=" + userId + ", userMail=" + userMail + ", userName=" + userName + ", userPassword="
+				+ userPassword + ", userTotalProductivity=" + userTotalProductivity + "]";
 	}
 	
 	

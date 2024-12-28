@@ -2,6 +2,7 @@ package ticketreport.springmvc.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +19,10 @@ public class ProductivityDto
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long productivityId;
 	String currentDate;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	List<TicketDto> closedTickets;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	List<TicketDto> pendingTickets;
 
 	public long getProductivityId() {
@@ -54,6 +55,12 @@ public class ProductivityDto
 
 	public void setPendingTickets(List<TicketDto> pendingTickets) {
 		this.pendingTickets = pendingTickets;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductivityDto [productivityId=" + productivityId + ", currentDate=" + currentDate + ", closedTickets="
+				+ closedTickets + ", pendingTickets=" + pendingTickets + "]";
 	}
 	
 	
